@@ -1,48 +1,48 @@
 #include <sys/ioctl.h>            // Needed for SPI port
 #include <linux/spi/spidev.h>     // Needed for SPI port
 #include <fcntl.h>                // Needed for SPI port
-# include       <inttypes.h>
-# include       <stdio.h>
-# include       <unistd.h>
-# include       <string.h>
-# include       <alloca.h>
-    
-int 
+# include	<inttypes.h>
+# include	<stdio.h>
+# include	<unistd.h>
+# include	<string.h>
+# include	<alloca.h>
+
+int
 openSPI(const char *device, uint32_t speed)
-{   
+{
     uint8_t mode = SPI_MODE_0;
     uint8_t bits = 8;
     int fd;
-    
+
     /* Device oeffen */
     if ((fd = open(device, O_RDWR)) < 0)
     {
-        perror("Fehler Open Device");
-        return -1;
+	perror("Fehler Open Device");
+	return -1;
     }
-        
+
     /* Mode setzen */
     if (ioctl(fd, SPI_IOC_WR_MODE, &mode) < 0)
     {
-        perror("Fehler Set SPI-Modus");
-        close(fd);
-        return -1;
-    }   
-        
+	perror("Fehler Set SPI-Modus");
+	close(fd);
+	return -1;
+    }
+
     /* Wortlaenge setzen */
     if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits) < 0)
-    {   
-        perror("Fehler Set Wortlaenge");
-        close(fd);
-        return -1;
-    }   
-        
+    {
+	perror("Fehler Set Wortlaenge");
+	close(fd);
+	return -1;
+    }
+
     /* Datenrate setzen */
     if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) < 0)
-    {       
-        perror("Fehler Set Speed");
-        close(fd);
-        return -1;
+    {
+	perror("Fehler Set Speed");
+	close(fd);
+	return -1;
     }
 
     return fd;
@@ -87,3 +87,4 @@ spi_transfer(int fd, unsigned char *data, unsigned int length)
        return;
    }
 }
+

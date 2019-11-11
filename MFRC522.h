@@ -6,11 +6,11 @@ enum {
     PCD_TRANSCEIVE = 0x0C,
     PCD_RESETPHASE = 0x0F,
     PCD_CALCCRC    = 0x03,
-        
+
     PICC_REQIDL    = 0x26,
     PICC_REQALL    = 0x52,
     PICC_ANTICOLL  = 0x93,
-    PICC_SElECTTAG = 0x93,
+    PICC_SELECTTAG = 0x93,
     PICC_AUTHENT1A = 0x60,
     PICC_AUTHENT1B = 0x61,
     PICC_READ      = 0x30,
@@ -20,7 +20,7 @@ enum {
     PICC_RESTORE   = 0xC2,
     PICC_TRANSFER  = 0xB0,
     PICC_HALT      = 0x50,
-};  
+};
 
 enum {
     Reserved00     = 0x00,
